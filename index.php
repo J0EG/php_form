@@ -1,38 +1,24 @@
-<html> 
-<head> 
-<title>Joes World V4</title> 
-    <H1> Joes App 37 for Demo</H1>
-<?PHP
+<?php
 
-function getUserIP()
-{
-    $client  = @$_SERVER['HTTP_CLIENT_IP'];
-    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
-    $remote  = $_SERVER['REMOTE_ADDR'];
+// Get the user's name.
+$name = $_POST['name'];
 
-    if(filter_var($client, FILTER_VALIDATE_IP))
-    {
-        $ip = $client;
-    }
-    elseif(filter_var($forward, FILTER_VALIDATE_IP))
-    {
-        $ip = $forward;
-    }
-    else
-    {
-        $ip = $remote;
-    }
+// Get the client's IP address.
+$ip = $_SERVER['REMOTE_ADDR'];
 
-    return $ip;
-}
+// Get the current date and time.
+$date = date('Y-m-d');
+$time = date('H:i:s');
 
+// Create an array to store the user's information.
+$userInfo = [
+    'name' => $name,
+    'ip' => $ip,
+    'date' => $date,
+    'time' => $time,
+];
 
-$user_ip = getUserIP();
-
-echo "Hello , Your IP is V4:"; echo $user_ip; // Output IP address [Ex: 177.87.193.134]
-
+// Return the user's information as a JSON object.
+echo json_encode($userInfo);
 
 ?>
-</head> 
-<body> 
-
